@@ -1,2 +1,2 @@
 # copyrightprotect
-ms project
+_MS project in Kyonggi Univ._
