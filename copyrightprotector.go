@@ -176,7 +176,7 @@ func purchaseVideo(stub shim.ChaincodeStubInterface, args []string) (string, err
 func main() {
 	err := shim.Start(new(copyrightprotector))
 	if err != nil {
-		fmt.Println("Could not start copyrightprotector Chaincode")
+		fmt.Errorf("Could not start copyrightprotector Chaincode ERROR:: %s", err)
 	} else {
 		fmt.Println("copyrightprotector Chaincode successfully started")
 	}
