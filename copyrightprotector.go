@@ -43,52 +43,24 @@ func (t *copyrightprotector) Invoke(stub shim.ChaincodeStubInterface) peer.Respo
 		result, err = addVideo(stub, args)
 	case "purchaseVideo":
 		result, err = purchaseVideo(stub, args)
-	case "anotherCCFunc":
-		chainCodeArgs := util.ToChaincodeArgs("anotherCCFunc", "paramA")
-		response := stub.InvokeChaincode("anotherCCFunc", chainCodeArgs, "channelname")
-		if response.Status != shim.OK {
-			return shim.Error(response.Message)
-		}
 	}
 	if err != nil {
 		return shim.Error(err.Error())
 	}
+
+	chainCodeArgs := util.ToChaincodeArgs("anotherCCFunc", "paramA")
+	response := stub.InvokeChaincode("anotherCCFunc", chainCodeArgs, "channelname")
+	if response.Status != shim.OK {
+		return shim.Error(response.Message)
+	}
+
 	return shim.Success([]byte(result))
-}
-
-func initLedger(stub shim.ChaincodeStubInterface) (string, error) {
-	owners := map[string]owner{}
-	videos := map[string]video{}
-
-	owners["nakhoon"] = owner{
-		Name:   "Nakhoon",
-		Videos: map[string]video{},
-	}
-	videos["0"] = video{
-		Id:       "DCPoTnakAe0",
-		Owner:    "nakhoon",
-		Metadata: "meta1",
-	}
-	videos["1"] = video{
-		Id:       "id",
-		Owner:    "owner",
-		Metadata: "metadata",
-	}
-
-	ownersAsBytes, _ := json.Marshal(owners)
-	videosAsBytes, _ := json.Marshal(videos)
-	err := stub.PutState("Owners", ownersAsBytes)
-	er := stub.PutState("Videos", videosAsBytes)
-	if (err != nil) && (er != nil) {
-		return "", fmt.Errorf("failed to intialize ledger")
-	}
-	return string(videosAsBytes), err
 }
 
 func main() {
 	err := shim.Start(new(copyrightprotector))
 	if err != nil {
-		fmt.Println("Could not start copyrightprotector Chaincode")
+		fmt.Println("Could not start 'copyrightprotector' Chaincode")
 	} else {
 		fmt.Println("copyrightprotector Chaincode successfully started")
 	}
