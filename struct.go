@@ -9,10 +9,16 @@ type owner struct {
 }
 
 // video info
+///each video transaction
 type video struct {
 	Id       string `json:"Id"`
 	Owner    string `json:"Owner"`
 	Metadata string `json:"Metadata"`
 	//contract info
 	//transfer contract info
+}
+
+//transferContract info
+type transferContract struct {
+	Owner string `json:"Owner"`
 }
