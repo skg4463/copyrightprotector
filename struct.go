@@ -18,7 +18,13 @@ type video struct {
 	//transfer contract info
 }
 
-//transferContract info
+//contractClass =
+//@ RF(royalty free) 0,
+//@ RE(royalty exist) 1,
+//@ CC(creative commons) 2
 type transferContract struct {
-	Owner string `json:"Owner"`
+	contractor    owner   `json:"contractor"` //contract presenter
+	contractee    owner   `json:"contractee"` //video owner
+	contractClass int     `json:"contractClass"`
+	contractFee   float64 `json:"contractFee"`
 }
