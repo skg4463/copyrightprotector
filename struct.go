@@ -1,30 +1,38 @@
 package main
 
-// video owner info
+// video's owner info (user)
+//owner[name] =
 type owner struct {
-	Name          string           `json:"Name"`
-	Videos        map[string]video `json:"Videos"`
-	ReputationRaw float64          `json:"ReputationRaw"`
-	IsVoter       bool             `json:"IsVoter"`
+	Name          string           `json:"name"`
+	Videos        map[string]video `json:"videos"`
+	ReputationRaw float64          `json:"reputationRaw"`
+	IsVoter       bool             `json:"isVoter"`
 }
 
 // video info
-///each video transaction
+//video[id] =
 type video struct {
-	Id       string `json:"Id"`
-	Owner    string `json:"Owner"`
-	Metadata string `json:"Metadata"`
+	Id                      string                  `json:"id"`
+	Owner                   string                  `json:"owner"`
+	Metadata                string                  `json:"metadata"`
+	contractInfo            transferContract        `json:"contractInfo"`
+	forTransferContractInfo forTransferContractInfo `json:"forTransferContractInfo"`
 	//contract info
 	//transfer contract info
 }
 
-//contractClass =
-//@ RF(royalty free) 0,
-//@ RE(royalty exist) 1,
-//@ CC(creative commons) 2
+//contractClass = RF, RE, CC
 type transferContract struct {
-	contractor    owner   `json:"contractor"` //contract presenter
-	contractee    owner   `json:"contractee"` //video owner
+	contractor   string                  `json:"contractor"` //contract presenter
+	contractee   string                  `json:"contractee"` //parent video's owner
+	contractInfo forTransferContractInfo `json:"contractClass"`
+	parentVideo  string                  `json:"parentVideo"`
+}
+
+//@ RF(royalty free) 0, fee 0
+//@ RE(royalty exist) 1, fee exist
+//@ CC(creative commons) 2 fee 0
+type forTransferContractInfo struct {
 	contractClass int     `json:"contractClass"`
 	contractFee   float64 `json:"contractFee"`
 }
