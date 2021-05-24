@@ -37,14 +37,16 @@ type forTransferContractInfo struct {
 }
 
 type contractAlert struct {
-	Contractor []byte `json:"contractor"`
-	Contractee []byte `json:"contractee"`
+	Contractor []byte `json:"contractor"` //contract presenter
+	Contractee []byte `json:"contractee"` //parent video's owner
 	Video      string `json:"video"`
 }
 
 type transferContractWaitingList struct {
-	Contractor []byte `json:"contractor"`
-	Contractee []byte `json:"contractee"`
+	Contractor []byte `json:"contractor"` //contract presenter
+	Contractee []byte `json:"contractee"` //parent video's owner
 	Video      string `json:"video"`
 	Isfine     bool   `json:"isfine"`
 }
+
+var contractCount = 0

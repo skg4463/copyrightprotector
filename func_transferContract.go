@@ -11,10 +11,9 @@ func transferContractPresent(stub shim.ChaincodeStubInterface, args []string) (s
 	if len(args) != 1 {
 		return "", fmt.Errorf("Incorrect arguments, Expecting 1 arguments")
 	}
+
 	videoAsBytes, _ := stub.GetState("Videos")
-
 	videos := map[string]video{}
-
 	_ = json.Unmarshal(videoAsBytes, &videos)
 
 	videoInfo := videos[args[0]]
@@ -25,17 +24,32 @@ func transferContractPresent(stub shim.ChaincodeStubInterface, args []string) (s
 
 	transactionCreator, _ := stub.GetCreator()
 
-	alert := contractAlert{
+	alertStruct := contractAlert{
 		Contractor: transactionCreator,
 		Contractee: videoInfo.Owner.Identity,
 		Video:      videoInfo.Id,
 	}
-	alert2, _ := json.Marshal(alert)
-	err := stub.SetEvent("transferContractAlert", alert2)
+	alert, _ := json.Marshal(alertStruct)
+	err := stub.SetEvent("transferContractAlert", alert)
 	if err != nil {
 		return "", err
 	}
 
 	contractAsBytes, _ := stub.GetState("Contracts")
+	contracts := map[string]transferContractWaitingList{}
+	_ = json.Unmarshal(contractAsBytes, &contracts)
 
+	contracts[string(rune(contractCount))] = transferContractWaitingList{
+		Contractor: transactionCreator,
+		Contractee: videoInfo.Owner.Identity,
+		Video:      videoInfo.Id,
+		Isfine:     false,
+	}
+	updatedContracts, _ := json.Marshal(contracts)
+	err = stub.PutState("Contracts", updatedContracts)
+	if err != nil {
+		return "", fmt.Errorf("Failed to set : %s", args[0])
+	}
+
+	return string(updatedContracts), nil
 }
