@@ -35,4 +35,7 @@ func transferContractPresent(stub shim.ChaincodeStubInterface, args []string) (s
 	if err != nil {
 		return "", err
 	}
+
+	contractAsBytes, _ := stub.GetState("Contracts")
+
 }
