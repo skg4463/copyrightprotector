@@ -30,9 +30,17 @@ func getTransactionByID(vledger ledger.PeerLedger, txid []byte) peer.Response {
 	return shim.Success(bytes)
 }
 
-func reputationRawCalc(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+//param : owner id
+func reputationRawCalc(stub shim.ChaincodeStubInterface, args []string) (int, error) {
+	if len(args) != 1 {
+		return 0, fmt.Errorf("Incorrect arguments, Expecting 1 arguments")
+	}
+	ownerAsBytes, _ := stub.GetState("Owners")
+	ownerData := map[string]owner{}
+	_ = json.Unmarshal(ownerAsBytes, &ownerData)
+	rr := ownerData[args[0]].ReputationRaw
 
-	return "", fmt.Errorf("")
+	return int(rr), fmt.Errorf("reputationRawCalc")
 }
 
 func getCreatorCert(stub shim.ChaincodeStubInterface) (interface{}, error) {
