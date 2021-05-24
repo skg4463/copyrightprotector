@@ -9,7 +9,7 @@ import (
 
 func purchaseVideo(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	if len(args) != 2 {
-		return "", fmt.Errorf("Incorrect arguments. Expecting two arguments (user name, and video id)")
+		return "", fmt.Errorf("Incorrect arguments. Expecting two arguments (user name, video id)")
 	}
 	videosAsBytes, _ := stub.GetState("Videos")
 	ownersAsBytes, _ := stub.GetState("Owners")

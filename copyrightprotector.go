@@ -31,6 +31,8 @@ func (t *copyrightprotector) Invoke(stub shim.ChaincodeStubInterface) peer.Respo
 		result, err = addVideo(stub, args)
 	case "purchaseVideo":
 		result, err = purchaseVideo(stub, args)
+	case "transferContractPresent":
+		result, err = transferContractPresent(stub, args)
 	}
 	if err != nil {
 		return shim.Error(err.Error())

@@ -15,14 +15,28 @@ func initLedger(stub shim.ChaincodeStubInterface) (string, error) {
 		Name:   "Nakhoon",
 		Videos: map[string]video{},
 	}
-	videos["0"] = video{
-		Id:       "DCPoTnakAe0",
-		Owner:    "nakhoon",
-		Metadata: "meta1",
+	owners["owner"] = owner{
+		Name:   "Nakhoon",
+		Videos: map[string]video{},
 	}
-	videos["1"] = video{
+
+	videos["DCPoTnakAe0"] = video{
+		Id:       "DCPoTnakAe0",
+		Owner:    owners["nakhoon"],
+		Metadata: "meta1",
+		ContractInfo: transferContractInfo{
+			Contractor: "",
+			Contractee: "",
+			ContractInfo: forTransferContractInfo{
+				ContractClass: 0,
+				ContractFee:   0,
+			},
+			ParentVideo: "",
+		},
+	}
+	videos["id"] = video{
 		Id:       "id",
-		Owner:    "owner",
+		Owner:    owners["owner"],
 		Metadata: "metadata",
 	}
 

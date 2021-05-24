@@ -11,13 +11,17 @@ func addVideo(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	if len(args) != 3 {
 		return "", fmt.Errorf("Incorrect arguments. Expecting 3 arguments (id, owner, metadata)")
 	}
+
+	owners := map[string]owner{}
 	videos := map[string]video{}
+	ownersAsBytes, _ := json.Marshal(owners)
 	videossAsBytes, _ := stub.GetState("Videos")
+	_ = json.Unmarshal(ownersAsBytes, &owners)
 	_ = json.Unmarshal(videossAsBytes, &videos)
 
 	videos[args[0]] = video{
 		Id:       args[0],
-		Owner:    args[1],
+		Owner:    owners[args[1]],
 		Metadata: args[2],
 	}
 

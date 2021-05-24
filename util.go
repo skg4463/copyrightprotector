@@ -1,9 +1,12 @@
 package main
 
 import (
+	"crypto/x509"
 	"encoding/json"
+	"encoding/pem"
 	"fmt"
 	"github.com/hyperledger/fabric-chaincode-go/shim"
+	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/core/ledger"
 )
@@ -25,4 +28,27 @@ func getTransactionByID(vledger ledger.PeerLedger, txid []byte) peer.Response {
 		return shim.Error(err.Error())
 	}
 	return shim.Success(bytes)
+}
+
+func reputationRawCalc(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+
+	return "", fmt.Errorf("")
+}
+
+func getCreatorCert(stub shim.ChaincodeStubInterface) (interface{}, error) {
+	serializedid, _ := stub.GetCreator()
+	sid := &msp.SerializedIdentity{}
+	err := json.Unmarshal(serializedid, &sid)
+	if err != nil {
+		return "", fmt.Errorf("Unmarshal error")
+	}
+	bl, _ := pem.Decode(sid.IdBytes)
+	if bl == nil {
+		return "", fmt.Errorf("bl is nil")
+	}
+	cert, err := x509.ParseCertificate(bl.Bytes)
+	if err != nil {
+		return "", fmt.Errorf("Unable to parse certificate")
+	}
+	return cert, err
 }

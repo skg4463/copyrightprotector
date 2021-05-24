@@ -7,32 +7,44 @@ type owner struct {
 	Videos        map[string]video `json:"videos"`
 	ReputationRaw float64          `json:"reputationRaw"`
 	IsVoter       bool             `json:"isVoter"`
+	Identity      []byte           `json:"identity"`
 }
 
 // video info
 //video[id] =
 type video struct {
 	Id                      string                  `json:"id"`
-	Owner                   string                  `json:"owner"`
+	Owner                   owner                   `json:"owner"`
 	Metadata                string                  `json:"metadata"`
-	contractInfo            transferContract        `json:"contractInfo"`
-	forTransferContractInfo forTransferContractInfo `json:"forTransferContractInfo"`
-	//contract info
-	//transfer contract info
+	ContractInfo            transferContractInfo    `json:"contractInfo"`
+	ForTransferContractInfo forTransferContractInfo `json:"forTransferContractInfo"`
 }
 
 //contractClass = RF, RE, CC
-type transferContract struct {
-	contractor   string                  `json:"contractor"` //contract presenter
-	contractee   string                  `json:"contractee"` //parent video's owner
-	contractInfo forTransferContractInfo `json:"contractClass"`
-	parentVideo  string                  `json:"parentVideo"`
+type transferContractInfo struct {
+	Contractor   string                  `json:"contractor"` //contract presenter
+	Contractee   string                  `json:"contractee"` //parent video's owner
+	ContractInfo forTransferContractInfo `json:"contractClass"`
+	ParentVideo  string                  `json:"parentVideo"`
 }
 
-//@ RF(royalty free) 0, fee 0
-//@ RE(royalty exist) 1, fee exist
-//@ CC(creative commons) 2 fee 0
+//@ RF(royalty free) 		1, fee 0
+//@ RE(royalty exist) 		2, fee exist
+//@ CC(creative commons) 	3 fee 0
 type forTransferContractInfo struct {
-	contractClass int     `json:"contractClass"`
-	contractFee   float64 `json:"contractFee"`
+	ContractClass int     `json:"contractClass"`
+	ContractFee   float64 `json:"contractFee"`
+}
+
+type contractAlert struct {
+	Contractor []byte `json:"contractor"`
+	Contractee []byte `json:"contractee"`
+	Video      string `json:"video"`
+}
+
+type transferContractWaitingList struct {
+	Contractor []byte `json:"contractor"`
+	Contractee []byte `json:"contractee"`
+	Video      string `json:"video"`
+	Isfine     bool   `json:"isfine"`
 }
