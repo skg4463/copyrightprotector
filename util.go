@@ -43,20 +43,26 @@ func reputationRawCalc(stub shim.ChaincodeStubInterface, args []string) (int, er
 	return int(rr), fmt.Errorf("reputationRawCalc")
 }
 
+//owner authorization
 func getCreatorCert(stub shim.ChaincodeStubInterface) (interface{}, error) {
 	serializedid, _ := stub.GetCreator()
+
 	sid := &msp.SerializedIdentity{}
 	err := json.Unmarshal(serializedid, &sid)
 	if err != nil {
 		return "", fmt.Errorf("Unmarshal error")
 	}
+
 	bl, _ := pem.Decode(sid.IdBytes)
 	if bl == nil {
 		return "", fmt.Errorf("bl is nil")
 	}
+
 	cert, err := x509.ParseCertificate(bl.Bytes)
 	if err != nil {
 		return "", fmt.Errorf("Unable to parse certificate")
 	}
+
+	//certification
 	return cert, err
 }
