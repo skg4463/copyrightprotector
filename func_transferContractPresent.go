@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/hyperledger/fabric-chaincode-go/shim"
+	"strconv"
 )
 
 //@Param targetVideo serial
+//@Emit contractAlert
 func transferContractPresent(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	if len(args) != 1 {
 		return "", fmt.Errorf("Incorrect arguments, Expecting 1 arguments")
@@ -22,11 +24,11 @@ func transferContractPresent(stub shim.ChaincodeStubInterface, args []string) (s
 		return "", fmt.Errorf("Incorrect Contract Call, this Video is not Creative Commons")
 	}
 
-	transactionCreator, _ := stub.GetCreator()
+	transactionCreator, _ := getCreatorCert(stub)
 
 	alertStruct := contractAlert{
 		Contractor: transactionCreator,
-		Contractee: videoInfo.Owner.Identity,
+		Contractee: videoInfo.Owner.Identity, //indexed
 		Video:      videoInfo.Id,
 	}
 	alert, _ := json.Marshal(alertStruct)
@@ -39,7 +41,7 @@ func transferContractPresent(stub shim.ChaincodeStubInterface, args []string) (s
 	contracts := map[string]transferContractWaitingList{}
 	_ = json.Unmarshal(contractAsBytes, &contracts)
 
-	contracts[string(contractCount)] = transferContractWaitingList{
+	contracts[strconv.Itoa(contractCount)] = transferContractWaitingList{
 		Contractor: transactionCreator,
 		Contractee: videoInfo.Owner.Identity,
 		Video:      videoInfo.Id,

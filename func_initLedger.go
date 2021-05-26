@@ -24,7 +24,7 @@ func initLedger(stub shim.ChaincodeStubInterface) (string, error) {
 		Id:       "DCPoTnakAe0",
 		Owner:    owners["nakhoon"],
 		Metadata: "meta1",
-		ContractInfo: transferContractInfo{
+		ContractedInfo: transferContractedInfo{
 			Contractor: "",
 			Contractee: "",
 			ContractInfo: forTransferContractInfo{
