@@ -21,28 +21,26 @@ func (t *copyrightprotector) Invoke(stub shim.ChaincodeStubInterface) peer.Respo
 	var err error
 
 	switch function {
+	//basic func
 	case "initLedger":
 		result, err = initLedger(stub)
+	//query func
 	case "queryOwner":
 		result, err = queryOwner(stub, args)
 	case "queryVideo":
 		result, err = queryVideo(stub, args)
+	//adding func
 	case "addVideo":
 		result, err = addVideo(stub, args)
-	case "purchaseVideo":
-		result, err = purchaseVideo(stub, args)
+	//contract func
 	case "transferContractPresent":
 		result, err = transferContractPresent(stub, args)
+	case "videoOwnership":
+		result, err = videoOwnership(stub, args)
 	}
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-
-	// chainCodeArgs := util.ToChaincodeArgs("anotherCCFunc", "paramA")
-	// response := stub.InvokeChaincode("anotherCCFunc", chainCodeArgs, "channelname")
-	// if response.Status != shim.OK {
-	// 	return shim.Error(response.Message)
-	// }
 
 	return shim.Success([]byte(result))
 }

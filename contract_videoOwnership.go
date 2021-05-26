@@ -7,7 +7,7 @@ import (
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 )
 
-func purchaseVideo(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+func videoOwnership(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	if len(args) != 2 {
 		return "", fmt.Errorf("Incorrect arguments. Expecting two arguments (user name, video id)")
 	}
