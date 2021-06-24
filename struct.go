@@ -54,4 +54,4 @@ type transferContractWaitingList struct {
 	Isfine     bool        `json:"isfine"`
 }
 
-var contractCount = 0
+var contractSerial = 0

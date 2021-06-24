@@ -41,13 +41,13 @@ func transferContractPresent(stub shim.ChaincodeStubInterface, args []string) (s
 	contracts := map[string]transferContractWaitingList{}
 	_ = json.Unmarshal(contractAsBytes, &contracts)
 
-	contracts[strconv.Itoa(contractCount)] = transferContractWaitingList{
+	contracts[strconv.Itoa(contractSerial)] = transferContractWaitingList{
 		Contractor: transactionCreator,
 		Contractee: videoInfo.Owner.Identity,
 		Video:      videoInfo.Id,
 		Isfine:     false,
 	}
-	contractCount++
+	contractSerial++
 
 	updatedContracts, _ := json.Marshal(contracts)
 	err = stub.PutState("Contracts", updatedContracts)
