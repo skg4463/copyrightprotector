@@ -9,7 +9,7 @@ import (
 
 //@Param targetVideo serial
 //@Emit contractAlert
-func transferContractPresent(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+func (t *copyrightprotector) transferContractPresent(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	if len(args) != 1 {
 		return "", fmt.Errorf("Incorrect arguments, Expecting 1 arguments")
 	}

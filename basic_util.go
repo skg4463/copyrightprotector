@@ -8,7 +8,7 @@ import (
 
 //invoke another chaincode in same channel
 //@@add args (chaincode info)
-func _(stub shim.ChaincodeStubInterface) (string, error) {
+func (t *copyrightprotector) _(stub shim.ChaincodeStubInterface) (string, error) {
 	chainCodeArgs := util.ToChaincodeArgs("anotherCCFunc", "paramA")
 	response := stub.InvokeChaincode("anotherCCFunc", chainCodeArgs, "channelname")
 	if response.Status != shim.OK {

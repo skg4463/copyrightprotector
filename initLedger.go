@@ -7,7 +7,7 @@ import (
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 )
 
-func initLedger(stub shim.ChaincodeStubInterface) (string, error) {
+func (t *copyrightprotector) initLedger(stub shim.ChaincodeStubInterface) (string, error) {
 	owners := map[string]owner{}
 	videos := map[string]video{}
 

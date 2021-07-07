@@ -13,7 +13,7 @@ import (
 
 //qscc
 //getTransactionByID
-func _(vledger ledger.PeerLedger, txid []byte) peer.Response {
+func (t *copyrightprotector) _(vledger ledger.PeerLedger, txid []byte) peer.Response {
 	if txid == nil {
 		return shim.Error("TXID is nil")
 	}
@@ -32,7 +32,7 @@ func _(vledger ledger.PeerLedger, txid []byte) peer.Response {
 }
 
 //owner authorization
-func getCreatorCert(stub shim.ChaincodeStubInterface) (interface{}, error) {
+func (t *copyrightprotector) getCreatorCert(stub shim.ChaincodeStubInterface) (interface{}, error) {
 	serializedid, _ := stub.GetCreator()
 
 	sid := &msp.SerializedIdentity{}

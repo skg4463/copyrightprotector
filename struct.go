@@ -31,9 +31,9 @@ type transferContractedInfo struct {
 }
 
 //Before Transfer Contract
-//@ RF(royalty free) 		1, fee 0
-//@ RE(royalty exist) 		2, fee exist
-//@ CC(creative commons) 	3, fee 0
+//@contract Param : RF(royalty free) 		1, fee 0
+//@contract Param : RE(royalty exist) 		2, fee exist
+//@contract Param : CC(creative commons) 	3, fee 0
 //@@ADD Fee Contract
 type forTransferContractInfo struct {
 	ContractClass int     `json:"contractClass"`
