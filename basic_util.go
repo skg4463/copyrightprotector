@@ -19,7 +19,7 @@ func (t *copyrightprotector) _(stub shim.ChaincodeStubInterface) (string, error)
 	return "", nil
 }
 
-func (dcc *DecodedChainCode) getDataArrayStrings(stub shim.ChaincodeStubInterface, dataKey string, args []string) ([]string, error) {
+func (dcc *copyrightprotector) getDataArrayStrings(stub shim.ChaincodeStubInterface, dataKey string, args []string) ([]string, error) {
 	var err error
 	var empty []string
 	if len(args) != 0 {
@@ -41,7 +41,7 @@ func (dcc *DecodedChainCode) getDataArrayStrings(stub shim.ChaincodeStubInterfac
 	return outputArray, nil
 }
 
-func (dcc *DecodedChainCode) saveStringToDataArray(stub shim.ChaincodeStubInterface, dataKey string, addString string, ledger []string) ([]byte, error) {
+func (dcc *copyrightprotector) saveStringToDataArray(stub shim.ChaincodeStubInterface, dataKey string, addString string, ledger []string) ([]byte, error) {
 	var err error
 	// Add the string to the array
 	ledger = append(ledger, addString)
@@ -53,7 +53,7 @@ func (dcc *DecodedChainCode) saveStringToDataArray(stub shim.ChaincodeStubInterf
 	return nil, nil
 }
 
-func (dcc *DecodedChainCode) saveLedger(stub shim.ChaincodeStubInterface, dataKey string, ledger []string) error {
+func (dcc *copyrightprotector) saveLedger(stub shim.ChaincodeStubInterface, dataKey string, ledger []string) error {
 	var err error
 	// Marshall the ledger to bytes
 	bytesToWrite, err := json.Marshal(&ledger)
