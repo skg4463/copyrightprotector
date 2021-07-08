@@ -9,7 +9,7 @@ import (
 //reputation raw (float64) -> persentage (int)
 //param : owner id
 //reputationRawCalc
-func _(stub shim.ChaincodeStubInterface, args []string) (int, error) {
+func (t *copyrightprotector) _(stub shim.ChaincodeStubInterface, args []string) (int, error) {
 	if len(args) != 1 {
 		return 0, fmt.Errorf("Incorrect arguments, Expecting 1 arguments")
 	}
