@@ -55,3 +55,5 @@ type transferContractWaitingList struct {
 }
 
 var contractSerial = 0
+
+var PRIMARYKEY = [3]string{"Parties", "Votes", "Candidates"}
