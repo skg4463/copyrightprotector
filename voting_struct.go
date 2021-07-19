@@ -14,5 +14,4 @@ type Party struct {
 	VotesToAssign []string `json:"votestoassign"`
 	VotesReceived []string `json:"votesreceived"`
 	CandidateUrl  string   `json:"candidateUrl"`
-	ScreenshotUrl string   `json:"screenshotUrl"`
 }

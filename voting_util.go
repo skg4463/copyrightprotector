@@ -22,20 +22,20 @@ func (slice Candidates) Swap(i, j int) {
 }
 
 // Query is our entry point for queries
-func Query(stub shim.ChaincodeStubInterface, fn string, args []string) ([]byte, error) {
-	// Handle different functions
-	if fn == "read" { // read a variable
-		return read(stub, fn, args)
-	} else if fn == "readParty" {
-		return readParty(stub, fn, args)
-	} else if fn == "readAllParties" {
-		return readAllParties(stub, fn, args)
-	} else if fn == "readAllCandidates" {
-		return readAllCandidates(stub, fn, args)
-	}
-	fmt.Println("\t*** ERROR: Query function did not find ChainCode function: " + fn)
-	return nil, errors.New(" --- QUERY ERROR: Received unknown function query")
-}
+//func Query(stub shim.ChaincodeStubInterface, fn string, args []string) ([]byte, error) {
+//	// Handle different functions
+//	if fn == "read" { // read a variable
+//		return read(stub, fn, args)
+//	} else if fn == "readParty" {
+//		return readParty(stub, fn, args)
+//	} else if fn == "readAllParties" {
+//		return readAllParties(stub, fn, args)
+//	} else if fn == "readAllCandidates" {
+//		return readAllCandidates(stub, fn, args)
+//	}
+//	fmt.Println("\t*** ERROR: Query function did not find ChainCode function: " + fn)
+//	return nil, errors.New(" --- QUERY ERROR: Received unknown function query")
+//}
 
 // ============================================================================================================================
 

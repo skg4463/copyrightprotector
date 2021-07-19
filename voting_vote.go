@@ -15,26 +15,26 @@ type Candidates []Party // To assign the sorting functions
 func createParty(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	var err error
 	var emptyArgs []string
-	if len(args) != 6 { // id, name, voter, candidate, votestoassign, votesreceived, candidateUrl, screenshotUrl
+	if len(args) != 5 { // id, name, voter, candidate, votestoassign, votesreceived, candidateUrl
 		err = errors.New("{\"Error\":\"Expecting 6 arguments, got " + strconv.Itoa(len(args)))
 		fmt.Printf("\t *** %s", err)
 		return "", err
 	}
-	// The partyId needs to be unique. Check if the party does not already exist.
+	// The partyId needs to be unique
 	partyId := args[0]
-	// Get all the parties that are currently in the system.
+	// Get all the party
 	partyIds, err := getDataArrayStrings(stub, PRIMARYKEY[0], emptyArgs)
 	if err != nil {
 		PrintErrorFull("createParty - getDataArrayStrings", err)
 		return "", err
 	}
-	// Get all the candidates that are currently in the system.
+	// Get all the candidate
 	candidateIds, err := getDataArrayStrings(stub, PRIMARYKEY[2], emptyArgs)
 	if err != nil {
 		PrintErrorFull("createParty - getDataArrayStrings", err)
 		return "", err
 	}
-	// Check if the partyId exists in the current ledger of parties.
+	// Check if the partyId exists in the current ledger of parties
 	partyExists := IsElementInSlice(partyIds, partyId)
 	if partyExists == false {
 		voter, err := strconv.ParseBool(args[2])
@@ -49,12 +49,11 @@ func createParty(stub shim.ChaincodeStubInterface, args []string) (string, error
 		}
 		// Create a new party
 		var newParty = Party{
-			Id:            partyId,
-			Name:          args[1],
-			Voter:         voter,
-			Candidate:     candidate,
-			CandidateUrl:  args[4],
-			ScreenshotUrl: args[5],
+			Id:           partyId,
+			Name:         args[1],
+			Voter:        voter,
+			Candidate:    candidate,
+			CandidateUrl: args[4],
 		}
 		// Save new party
 		if err = newParty.save(stub); err != nil {
@@ -75,7 +74,7 @@ func createParty(stub shim.ChaincodeStubInterface, args []string) (string, error
 				return "", err
 			}
 		}
-		// Done!
+
 		PrintSuccess("Added a new party: " + partyId)
 		return "", nil
 	} else {
@@ -83,9 +82,9 @@ func createParty(stub shim.ChaincodeStubInterface, args []string) (string, error
 		PrintErrorFull("createParty", err)
 		return "", err
 	}
-	// Redundancy.
+
 	return "", nil
-} // end of dcc.createParty
+}
 
 func readParty(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
@@ -150,7 +149,7 @@ func readAllParties(stub shim.ChaincodeStubInterface, args []string) ([]byte, er
 		return nil, nil
 	}
 	return nil, nil // redundancy
-} // end of dcc.readAllParties
+}
 
 func getParty(stub shim.ChaincodeStubInterface, args []string) (Party, error) {
 	var party Party // We need to have an empty party ready to return in case of an error.
@@ -177,7 +176,7 @@ func getParty(stub shim.ChaincodeStubInterface, args []string) (Party, error) {
 		return party, err
 	}
 	return party, nil
-} // end of dcc.getParty
+}
 
 func updateParty(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	var err error
@@ -226,7 +225,7 @@ func updateParty(stub shim.ChaincodeStubInterface, args []string) (string, error
 	}
 	fmt.Printf("\t --- Updated Party %s\n", partyId)
 	return "", nil
-} // end of dcc.assignAssetToParty
+}
 
 func readAllCandidates(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
@@ -284,4 +283,4 @@ func (p *Party) save(stub shim.ChaincodeStubInterface) error {
 	}
 	fmt.Printf("\t --- Saved party %v to blockchain\n", &p.Id)
 	return nil
-} // end of p.save
+}

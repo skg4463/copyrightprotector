@@ -55,7 +55,7 @@ func createVotesAndAssignToAll(stub shim.ChaincodeStubInterface, args []string) 
 		}
 	}
 	return "", nil
-} // end of dcc.createvotesAndAssignToAll
+}
 
 func readVote(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
