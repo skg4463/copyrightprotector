@@ -7,7 +7,7 @@ import (
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 )
 
-func (t *copyrightprotector) addVideo(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+func addVideo(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	if len(args) != 3 {
 		return "", fmt.Errorf("Incorrect arguments. Expecting 3 arguments (id, owner, metadata)")
 	}

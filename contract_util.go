@@ -32,7 +32,7 @@ func (t *copyrightprotector) _(vledger ledger.PeerLedger, txid []byte) peer.Resp
 }
 
 //owner authorization
-func (t *copyrightprotector) getCreatorCert(stub shim.ChaincodeStubInterface) (interface{}, error) {
+func getCreatorCert(stub shim.ChaincodeStubInterface) (interface{}, error) {
 	serializedid, _ := stub.GetCreator()
 
 	sid := &msp.SerializedIdentity{}

@@ -7,7 +7,7 @@ import (
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 )
 
-func (t *copyrightprotector) initLedger(stub shim.ChaincodeStubInterface) (string, error) {
+func initLedger(stub shim.ChaincodeStubInterface) (string, error) {
 	owners := map[string]owner{}
 	videos := map[string]video{}
 
@@ -47,5 +47,27 @@ func (t *copyrightprotector) initLedger(stub shim.ChaincodeStubInterface) (strin
 	if (err != nil) && (er != nil) {
 		return "", fmt.Errorf("failed to intialize ledger")
 	}
+
+	//voting init
+	var blank []string
+	blankBytes, err := json.Marshal(&blank)
+	if err != nil {
+		fmt.Printf("\t *** %s", err)
+		return "", err
+	}
+	//
+	if err = stub.PutState(PRIMARYKEY[0], blankBytes); err != nil {
+		fmt.Printf("\t *** %s", err)
+		return "", err
+	}
+	if err = stub.PutState(PRIMARYKEY[1], blankBytes); err != nil {
+		fmt.Printf("\t *** %s", err)
+		return "", err
+	}
+	if err = stub.PutState(PRIMARYKEY[2], blankBytes); err != nil {
+		fmt.Printf("\t *** %s", err)
+		return "", err
+	}
+
 	return string(videosAsBytes), err
 }

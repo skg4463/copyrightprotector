@@ -8,7 +8,7 @@ import (
 )
 
 // queryowner(owner name) =
-func (t *copyrightprotector) queryOwner(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+func queryOwner(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	if len(args) != 1 {
 		return "", fmt.Errorf("Incorrect arguments. Expecting a key")
 	}

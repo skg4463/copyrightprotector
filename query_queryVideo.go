@@ -7,7 +7,7 @@ import (
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 )
 
-func (t *copyrightprotector) queryVideo(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+func queryVideo(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	if len(args) != 1 {
 		return "", fmt.Errorf("Incorrect arguments. Expecting an id")
 	}

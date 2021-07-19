@@ -21,7 +21,7 @@ func (t *copyrightprotector) Invoke(stub shim.ChaincodeStubInterface) peer.Respo
 	var err error
 
 	switch function {
-	//basic func
+	//init func
 	case "initLedger":
 		result, err = initLedger(stub)
 	//query func
@@ -37,7 +37,15 @@ func (t *copyrightprotector) Invoke(stub shim.ChaincodeStubInterface) peer.Respo
 		result, err = transferContractPresent(stub, args)
 	case "videoOwnership":
 		result, err = videoOwnership(stub, args)
+	//vointg func
+	case "createParty":
+		result, err = createParty(stub, args)
+	case "createVotesAndAssignToAll":
+		result, err = createVotesAndAssignToAll(stub, args)
+	case "updateParty":
+		result, err = updateParty(stub, args)
 	}
+
 	if err != nil {
 		return shim.Error(err.Error())
 	}
