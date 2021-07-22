@@ -21,7 +21,7 @@ func (slice Candidates) Swap(i, j int) {
 	slice[i], slice[j] = slice[j], slice[i]
 }
 
-// Query is our entry point for queries
+// Query entry point for queries
 //func Query(stub shim.ChaincodeStubInterface, fn string, args []string) ([]byte, error) {
 //	// Handle different functions
 //	if fn == "read" { // read a variable
@@ -197,7 +197,7 @@ func IsElementInSlice(slice []string, element string) bool {
 	return check
 }
 
-// Function to return the index of an element in a slice.
+// FindElementIndex Function to return the index of an element in a slice.
 func FindElementIndex(slice []string, element string) int {
 	// Initialise return as false.
 	ix := -1
@@ -211,7 +211,7 @@ func FindElementIndex(slice []string, element string) int {
 	return ix
 }
 
-// Function to delete an element from a slice.?
+// DeleteElementFromSlice Function to delete an element from a slice.?
 func DeleteElementFromSlice(slice []string, element string) []string {
 	var emptySlice []string
 	if len(slice) == 0 {
