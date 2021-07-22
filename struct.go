@@ -20,6 +20,8 @@ type video struct {
 	ForTransferContractInfo forTransferContractInfo `json:"forTransferContractInfo"`
 }
 
+//<--flaging date add and cooldown add
+
 //After Transfer Contract
 //transfer ContractedInfo
 //transferContractInfo[video Id] = @

@@ -8,7 +8,7 @@ import (
 )
 
 //user to vote member
-//args: id, name, voter, candidate
+//args: id, name, voter, contentsID
 //votestoassign, votesreceived
 func createParty(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	var err error
@@ -43,7 +43,7 @@ func createParty(stub shim.ChaincodeStubInterface, args []string) (string, error
 			fmt.Printf("\t *** %s", err)
 			return "", err
 		}
-		candidate, err := strconv.ParseBool(args[3])
+		Contents, err := strconv.ParseBool(args[3])
 		if err != nil {
 			fmt.Printf("\t *** %s", err)
 			return "", err
@@ -51,10 +51,10 @@ func createParty(stub shim.ChaincodeStubInterface, args []string) (string, error
 
 		// Create a new party
 		var newParty = Party{
-			Id:        partyId,
-			Name:      args[1],
-			Voter:     voter,
-			Candidate: candidate,
+			Id:       partyId,
+			Name:     args[1],
+			Voter:    voter,
+			Contents: Contents,
 		}
 
 		// Save new party
@@ -69,7 +69,7 @@ func createParty(stub shim.ChaincodeStubInterface, args []string) (string, error
 			return "", err
 		}
 		// If it is a candidate, add the the candidates-ledger
-		if newParty.Candidate {
+		if newParty.Contents {
 			_, err = saveStringToDataArray(stub, PRIMARYKEY[2], partyId, candidateIds)
 			if err != nil {
 				PrintErrorFull("createParty - saveStringToDataArray", err)
