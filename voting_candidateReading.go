@@ -8,6 +8,9 @@ import (
 	"strconv"
 )
 
+//candidate class will modify to 'contents'
+//party - <voter, contents>
+
 type Candidates []Party // To assign the sorting functions
 
 func readAllCandidates(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
