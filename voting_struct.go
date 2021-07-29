@@ -6,6 +6,7 @@ type Vote struct {
 
 var PRIMARYKEY = [3]string{"Parties", "Votes", "Candidates"}
 
+// Party origin struct for STRUCT Voter, Contents
 type Party struct {
 	Id            string   `json:"id"`            //unique serial
 	Name          string   `json:"name"`          //username or video id
@@ -17,7 +18,7 @@ type Party struct {
 	repu          int      `json:"repu"`          //repetaion int
 }
 
-//party struct extract to 'voter' and 'content'
+// Voter party struct extract to 'voter' and 'content'
 //each Owner that isVoter is true flag have (party)voter struct
 type Voter struct {
 	Id              string   `json:"id"`               //unique serial
@@ -28,7 +29,7 @@ type Voter struct {
 
 //Voter, Contents boolean class !CHECK!
 
-//each Video have (party)contents struct
+// Contents each Video have (party)contents struct
 type Contents struct {
 	Id            string   `json:"id"`            //unique serial
 	Name          string   `json:"name"`          //video ID in struct VIDEO
