@@ -22,7 +22,7 @@ Hyperledger Fabric Chaincode
 *@voting_randao : random number generator
 *@voting_voterSelector : voter selection
 *@voting_vote : vote
-*@voting_postReaction : voting result collection
+*@voting_postReaction : voting result collection - reputation elevate reaction
 
 @voting_contentsReading
 @voting_partyReading
