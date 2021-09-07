@@ -5,7 +5,7 @@ package main
 type owner struct {
 	Name          string           `json:"name"`          //username
 	Videos        map[string]video `json:"videos"`        //video list
-	ReputationRaw float64          `json:"reputationRaw"` //reputation raw value
+	ReputationRaw uint64           `json:"reputationRaw"` //reputation raw value
 	IsVoter       bool             `json:"isVoter"`       //is this user owner?
 	Identity      interface{}      `json:"identity"`      //owner cert
 }
