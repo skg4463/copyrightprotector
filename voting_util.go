@@ -35,7 +35,7 @@ func (slice Candidates) Swap(i, j int) {
 //	}
 //	fmt.Println("\t*** ERROR: Query function did not find ChainCode function: " + fn)
 //	return nil, errors.New(" --- QUERY ERROR: Received unknown function query")
-//}
+//} back commit
 
 // ============================================================================================================================
 
